@@ -6,27 +6,33 @@ import { gql } from 'apollo-boost'
 import React, { useState } from 'react'
 import './App.css'
 
-const GET_JS_FRAMEWORKS = gql`
-  {
-  jsFrameworks {
-    edges {
-      node {
-        name
-      }
-    }
-  }
+interface JsFramework {
+  name: string
 }
+
+interface JsFrameworkData {
+  jsFrameworks: { nodes: JsFramework[] }
+}
+
+const GET_JS_FRAMEWORKS = gql`
+    {
+        jsFrameworks {
+            nodes {
+                name
+            }
+        }
+    }
 `
 
 function App() {
 
   const [columns] = useState([
     {
-      headerName: 'JavaScript Framework', field: 'node.name'
+      headerName: 'JavaScript Framework', field: 'name'
     },
   ])
 
-  const {loading, error, data} = useQuery(GET_JS_FRAMEWORKS)
+  const {loading, error, data} = useQuery<JsFrameworkData>(GET_JS_FRAMEWORKS)
 
   if (loading) {
     return <div>Loading...</div>
@@ -45,7 +51,7 @@ function App() {
     >
       <AgGridReact
         columnDefs={columns}
-        rowData={data.jsFrameworks.edges}>
+        rowData={data?.jsFrameworks.nodes}>
       </AgGridReact>
     </div>
   )
