@@ -1,4 +1,4 @@
-## Example of using React + GraphQL + PostGraphile + Apollo and AgGrid
+## Example of using React + PostGraphile + AgGrid
 
 * Create a user `react`
 
