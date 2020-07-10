@@ -1,0 +1,31 @@
+type OlympicWinner {
+    athlete: String,
+    country: String,
+    age: Int,
+    sport: String,
+    year: Int,
+    gold: Int,
+    silver: Int,
+    bronze: Int
+}
+
+type Query {
+    rows(
+        startRow: Int,
+        endRow: Int,
+        sorting: [SortModel],
+        rowGroups: [RowGroup],
+        groupKeys: [String]
+    ): [OlympicWinner]!
+}
+
+input SortModel {
+    colId: String
+    sort: String
+}
+
+input RowGroup {
+    id: String
+    field: String
+    displayName: String
+}
