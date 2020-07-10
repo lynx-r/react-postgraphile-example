@@ -6,7 +6,7 @@ import React from 'react'
 
 import ServerSideDatasource from './ServerSideDatasource'
 
-LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY ?? '')
+LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY || '')
 
 const columnDefs = [
   {field: 'athlete'},
