@@ -1,45 +1,59 @@
-import { useQuery } from '@apollo/react-hooks'
 import 'ag-grid-community/dist/styles/ag-grid.css'
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
+import 'ag-grid-community/dist/styles/ag-theme-balham.css'
+import { LicenseManager } from 'ag-grid-enterprise/main'
 import { AgGridReact } from 'ag-grid-react'
-import { gql } from 'apollo-boost'
-import React, { useState } from 'react'
-import './App.css'
+import React from 'react'
 
-interface JsFramework {
-  name: string
-}
+import ServerSideDatasource from './ServerSideDatasource'
 
-interface JsFrameworkData {
-  jsFrameworks: { nodes: JsFramework[] }
-}
+LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY ?? '')
 
-const GET_JS_FRAMEWORKS = gql`
-    {
-        jsFrameworks {
-            nodes {
-                name
-            }
-        }
+const columnDefs = [
+  {field: 'athlete'},
+  {field: 'country', enableRowGroup: true, rowGroup: true, hide: true},
+  {field: 'sport', enableRowGroup: true, rowGroup: true, hide: true},
+  {field: 'year'},
+  {field: 'age'},
+  {field: 'gold', type: 'valueColumn'},
+  {field: 'silver', type: 'valueColumn'},
+  {field: 'bronze', type: 'valueColumn'},
+]
+
+const gridOptions = {
+  columnDefs,
+
+  // use the server-side row model
+  rowModelType: 'serverSide',
+
+  // fetch 100 rows per at a time
+  cacheBlockSize: 200,
+
+  // only keep 10 blocks of rows
+  maxBlocksInCache: 10,
+
+  sideBar: true,
+
+  enableColResize: true,
+  enableSorting: true,
+  enableFilter: true,
+
+  columnTypes: {
+    dimension: {
+      enableRowGroup: true,
+      enablePivot: true,
+    },
+    valueColumn: {
+      width: 150,
+      aggFunc: 'sum',
+      enableValue: true,
+      cellClass: 'number',
+      allowedAggFuncs: ['avg', 'sum', 'min', 'max']
     }
-`
+  },
+}
 
 function App() {
-
-  const [columns] = useState([
-    {
-      headerName: 'JavaScript Framework', field: 'name'
-    },
-  ])
-
-  const {loading, error, data} = useQuery<JsFrameworkData>(GET_JS_FRAMEWORKS)
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-  if (error) {
-    return <div>Error! {error.message}</div>
-  }
+  const datasource = new ServerSideDatasource(gridOptions)
 
   return (
     <div
@@ -49,10 +63,7 @@ function App() {
         width: '600px'
       }}
     >
-      <AgGridReact
-        columnDefs={columns}
-        rowData={data?.jsFrameworks.nodes}>
-      </AgGridReact>
+      <AgGridReact gridOptions={gridOptions} serverSideDatasource={datasource}/>
     </div>
   )
 }
