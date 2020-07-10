@@ -1,12 +1,10 @@
-import 'ag-grid-community/dist/styles/ag-grid.css'
-import 'ag-grid-community/dist/styles/ag-theme-balham.css'
-import { LicenseManager } from 'ag-grid-enterprise/main'
-import { AgGridReact } from 'ag-grid-react'
-import React from 'react'
+import { Grid } from 'ag-grid-community';
 
-import ServerSideDatasource from './ServerSideDatasource'
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import 'ag-grid-enterprise';
 
-LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY || '')
+import ServerSideDatasource from './ServerSideDatasource';
 
 const columnDefs = [
   {field: 'athlete', enableRowGroup: true, rowGroup: true, hide: true},
@@ -17,7 +15,7 @@ const columnDefs = [
   {field: 'gold', type: 'valueColumn'},
   {field: 'silver', type: 'valueColumn'},
   {field: 'bronze', type: 'valueColumn'},
-]
+];
 
 const gridOptions = {
   columnDefs,
@@ -50,22 +48,10 @@ const gridOptions = {
       allowedAggFuncs: ['avg', 'sum', 'min', 'max']
     }
   },
-}
+};
 
-function App() {
-  const datasource = new ServerSideDatasource(gridOptions)
+const gridDiv = document.querySelector('#myGrid');
+new Grid(gridDiv, gridOptions);
 
-  return (
-    <div
-      className="ag-theme-balham"
-      style={{
-        height: '250px',
-        width: '1400px'
-      }}
-    >
-      <AgGridReact gridOptions={gridOptions} serverSideDatasource={datasource}/>
-    </div>
-  )
-}
-
-export default App
+const datasource = new ServerSideDatasource(gridOptions);
+gridOptions.api.setServerSideDatasource(datasource);
