@@ -57,10 +57,10 @@ function App() {
 
   return (
     <div
-      className="ag-theme-alpine"
+      className="ag-theme-balham"
       style={{
         height: '250px',
-        width: '600px'
+        width: '1400px'
       }}
     >
       <AgGridReact gridOptions={gridOptions} serverSideDatasource={datasource}/>
