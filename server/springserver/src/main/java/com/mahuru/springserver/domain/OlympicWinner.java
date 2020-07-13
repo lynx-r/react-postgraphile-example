@@ -1,4 +1,4 @@
-package com.mahuru.aggridss.domain;
+package com.mahuru.springserver.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

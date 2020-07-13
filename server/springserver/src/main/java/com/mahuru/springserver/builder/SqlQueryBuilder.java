@@ -1,7 +1,7 @@
-package com.mahuru.aggridss.builder;
+package com.mahuru.springserver.builder;
 
-import com.mahuru.aggridss.domain.RowGroup;
-import com.mahuru.aggridss.domain.SortModel;
+import com.mahuru.springserver.domain.RowGroup;
+import com.mahuru.springserver.domain.SortModel;
 
 import java.util.ArrayList;
 import java.util.List;

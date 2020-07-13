@@ -1,10 +1,10 @@
-package com.mahuru.aggridss.graphql;
+package com.mahuru.springserver.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.mahuru.aggridss.dao.OlympicWinnerDao;
-import com.mahuru.aggridss.domain.OlympicWinner;
-import com.mahuru.aggridss.domain.RowGroup;
-import com.mahuru.aggridss.domain.SortModel;
+import com.mahuru.springserver.dao.OlympicWinnerDao;
+import com.mahuru.springserver.domain.OlympicWinner;
+import com.mahuru.springserver.domain.RowGroup;
+import com.mahuru.springserver.domain.SortModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

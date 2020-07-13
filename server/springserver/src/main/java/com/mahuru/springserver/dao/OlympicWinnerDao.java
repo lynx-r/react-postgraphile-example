@@ -1,9 +1,9 @@
-package com.mahuru.aggridss.dao;
+package com.mahuru.springserver.dao;
 
-import com.mahuru.aggridss.builder.SqlQueryBuilder;
-import com.mahuru.aggridss.domain.OlympicWinner;
-import com.mahuru.aggridss.domain.RowGroup;
-import com.mahuru.aggridss.domain.SortModel;
+import com.mahuru.springserver.builder.SqlQueryBuilder;
+import com.mahuru.springserver.domain.OlympicWinner;
+import com.mahuru.springserver.domain.RowGroup;
+import com.mahuru.springserver.domain.SortModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
