@@ -33,6 +33,6 @@
 
 ## Дамп базы данных
 
-`PostgreSQL`: [server/olympic_winners.sql](server/olympic_winners.sql)
+`PostgreSQL`: [server/springserver/olympic_winners.sql](server/springserver/olympic_winners.sql)
 
-`MySQL`: [server/olympic_winners_mysql.sql](server/olympic_winners_mysql.sql)
+`MySQL`: [server/springserver/olympic_winners_mysql.sql](server/springserver/olympic_winners_mysql.sql)
