@@ -44,7 +44,7 @@ const columnDefs = [
 const defaultColDef = {
   filterParams: {
     debounceMs: 1000
-  }
+  },
 }
 
 const sideBar = {
