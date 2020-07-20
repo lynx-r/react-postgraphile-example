@@ -31,3 +31,8 @@
 
 ``` 
 
+## Дамп базы данных
+
+`PostgreSQL`: [server/olympic_winners.sql](server/olympic_winners.sql)
+
+`MySQL`: [server/olympic_winners_mysql.sql](server/olympic_winners_mysql.sql)
