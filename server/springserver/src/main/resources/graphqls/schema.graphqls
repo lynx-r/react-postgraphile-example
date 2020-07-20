@@ -11,17 +11,13 @@ type OlympicWinner {
 
 type Query {
     rows(
-        params: RowParams
+        startRow: Int,
+        endRow: Int,
+        sorting: [SortModel],
+        rowGroups: [RowGroup],
+        groupKeys: [String],
+        filterModel: Map
     ): [OlympicWinner]!
-}
-
-input RowParams {
-    startRow: Int,
-    endRow: Int,
-    sorting: [SortModel],
-    rowGroups: [RowGroup],
-    groupKeys: [String],
-    filterModel: String
 }
 
 input SortModel {
@@ -34,3 +30,5 @@ input RowGroup {
     field: String
     displayName: String
 }
+
+scalar Map

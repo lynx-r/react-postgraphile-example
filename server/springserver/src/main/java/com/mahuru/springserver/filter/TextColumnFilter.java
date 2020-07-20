@@ -5,12 +5,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class SetColumnFilter extends ColumnFilter {
-    private List<String> values;
+public class TextColumnFilter extends ColumnFilter {
+  private String type;
+  private String filter;
+  private String filterType;
 }

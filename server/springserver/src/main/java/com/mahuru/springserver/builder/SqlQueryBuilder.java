@@ -5,6 +5,7 @@ import com.mahuru.springserver.domain.SortModel;
 import com.mahuru.springserver.filter.ColumnFilter;
 import com.mahuru.springserver.filter.NumberColumnFilter;
 import com.mahuru.springserver.filter.SetColumnFilter;
+import com.mahuru.springserver.filter.TextColumnFilter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,7 +97,7 @@ public class SqlQueryBuilder {
   private String whereSql() {
     String whereFilters = concat(getGroupColumns(), getFilters())
         .collect(joining(" AND "));
-    return whereFilters.isEmpty() ? "" : format(" WHERE %s AND %s", whereFilters);
+    return whereFilters.isEmpty() ? "" : format(" WHERE %s", whereFilters);
   }
 
   private String limitSql() {
@@ -120,6 +121,10 @@ public class SqlQueryBuilder {
         return numberFilter().apply(columnName, (NumberColumnFilter) filter);
       }
 
+      if (filter instanceof TextColumnFilter) {
+        return textFilter().apply(columnName, (TextColumnFilter) filter);
+      }
+
       return "";
     };
 
@@ -139,6 +144,13 @@ public class SqlQueryBuilder {
 
       return columnName + (filerType.equals("inRange") ?
           " BETWEEN " + filterValue + " AND " + filter.getFilterTo() : " " + operator + " " + filterValue);
+    };
+  }
+
+  private BiFunction<String, TextColumnFilter, String> textFilter() {
+    return (String columnName, TextColumnFilter filter) -> {
+      String filterValue = filter.getFilter();
+      return !filterValue.isEmpty() ? (columnName + " ILIKE '" + filterValue + "%'") : "";
     };
   }
 

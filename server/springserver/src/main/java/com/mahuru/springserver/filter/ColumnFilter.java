@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
     property = "filterType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = NumberColumnFilter.class, name = "number"),
+    @JsonSubTypes.Type(value = TextColumnFilter.class, name = "text"),
     @JsonSubTypes.Type(value = SetColumnFilter.class, name = "set")})
 public abstract class ColumnFilter {
   String filterType;

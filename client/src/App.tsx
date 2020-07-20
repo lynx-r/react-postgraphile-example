@@ -10,17 +10,59 @@ LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY || '')
 
 const columnDefs = [
   {field: 'athlete', enableRowGroup: true, rowGroup: true, hide: true},
-  {field: 'country', enableRowGroup: true, rowGroup: true, hide: true},
+  {
+    field: 'country',
+    filter: 'agTextColumnFilter',
+    // filterParams: {
+    //   values: function (params: any) {
+    //     // async update simulated using setTimeout()
+    //     setTimeout(function () {
+    //       // fetch values from server
+    //       const values = ['Russia', 'United States', 'Great Britain', 'Canada']
+    //
+    //       // supply values to the set filter
+    //       params.success(values)
+    //     }, 100)
+    //   },
+    // },
+    enableRowGroup: true, rowGroup: true, hide: true
+  },
   {field: 'sport', enableRowGroup: true, rowGroup: true, hide: true},
-  {field: 'year', filter: 'agNumberColumnFilter',},
-  {field: 'age'},
+  {
+    field: 'year',
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    field: 'age',
+    filter: 'agNumberColumnFilter',
+  },
   {field: 'gold', type: 'valueColumn'},
   {field: 'silver', type: 'valueColumn'},
   {field: 'bronze', type: 'valueColumn'},
 ]
 
+const sideBar = {
+  toolPanels: [
+    {
+      id: 'columns',
+      labelDefault: 'Колонки',
+      labelKey: 'columns',
+      iconKey: 'columns',
+      toolPanel: 'agColumnsToolPanel',
+    },
+    {
+      id: 'filters',
+      labelDefault: 'Фильтры',
+      labelKey: 'filters',
+      iconKey: 'filter',
+      toolPanel: 'agFiltersToolPanel',
+    }
+  ],
+  defaultToolPanel: 'columns',
+}
 const gridOptions = {
   columnDefs,
+  sideBar,
 
   // use the server-side row model
   rowModelType: 'serverSide',
@@ -30,8 +72,6 @@ const gridOptions = {
 
   // only keep 10 blocks of rows
   maxBlocksInCache: 10,
-
-  sideBar: true,
 
   enableColResize: true,
   enableSorting: true,
@@ -63,7 +103,10 @@ function App() {
         width: '1400px'
       }}
     >
-      <AgGridReact gridOptions={gridOptions} serverSideDatasource={datasource}/>
+      <AgGridReact
+        gridOptions={gridOptions}
+        serverSideDatasource={datasource}
+      />
     </div>
   )
 }

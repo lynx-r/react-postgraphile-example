@@ -2,6 +2,26 @@
 # yarn lockfile v1
 
 
+"@ag-grid-community/core@~23.2.0":
+  version "23.2.1"
+  resolved "https://registry.yarnpkg.com/@ag-grid-community/core/-/core-23.2.1.tgz#532104da04dcc636bf01364116bcb66804d6de04"
+  integrity sha512-ZW4r6mICsCDX3xME2CpXLf+/EsKYO/EO1hq0QInBXJVFp7FC9/VPSpplo2iy8pPFZjkLQ5gb1yg9WcMo50+9CA==
+
+"@ag-grid-enterprise/core@~23.2.0":
+  version "23.2.1"
+  resolved "https://registry.yarnpkg.com/@ag-grid-enterprise/core/-/core-23.2.1.tgz#beec3b5d8892fdd72a450026b456fb3f78201986"
+  integrity sha512-0G+IOd2gQLP45MrrXIODxl4LVmx9hlZWj2PpAD37F9rIcEpZAgIdThyPMnbRcwA79hoQ72/J12U0/ljfymA4kA==
+  dependencies:
+    "@ag-grid-community/core" "~23.2.0"
+
+"@ag-grid-enterprise/set-filter@^23.2.1":
+  version "23.2.1"
+  resolved "https://registry.yarnpkg.com/@ag-grid-enterprise/set-filter/-/set-filter-23.2.1.tgz#473a3f76cf19010ea3c8f11b5fb7325bdcf3fe47"
+  integrity sha512-bYNhuq8CfKiTDBzOg097HuuT+1PFbf7BAIeAuOkl87b9Ctu4iIKhRvslZqC/b+GJgr2pK5Vw+gBKy07np0FplQ==
+  dependencies:
+    "@ag-grid-community/core" "~23.2.0"
+    "@ag-grid-enterprise/core" "~23.2.0"
+
 "@apollo/react-common@^3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@apollo/react-common/-/react-common-3.1.4.tgz#ec13c985be23ea8e799c9ea18e696eccc97be345"
