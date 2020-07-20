@@ -3,7 +3,9 @@ package com.mahuru.springserver.graphql;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.mahuru.springserver.dao.OlympicWinnerDao;
 import com.mahuru.springserver.domain.OlympicWinner;
-import com.mahuru.springserver.domain.RowParams;
+import com.mahuru.springserver.domain.RowGroup;
+import com.mahuru.springserver.domain.SortModel;
+import com.mahuru.springserver.filter.ColumnFilter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,10 +20,9 @@ public class RootQuery implements GraphQLQueryResolver {
     this.olympicWinnerDao = olympicWinnerDao;
   }
 
-  public List<OlympicWinner> getRows(RowParams params) {
-    return olympicWinnerDao.getData(params.getStartRow(), params.getEndRow(), params.getSorting(),
-        params.getRowGroups(), params.getFilterModel(), params.getGroupKeys());
+  public List<OlympicWinner> getRows(int startRow, int endRow, List<SortModel> sorting, List<RowGroup> rowGroups,
+                                     List<String> groupKeys, Map<String, ColumnFilter> filterModel) {
+    return olympicWinnerDao.getData(startRow, endRow, sorting, rowGroups, filterModel, groupKeys);
   }
-
 
 }

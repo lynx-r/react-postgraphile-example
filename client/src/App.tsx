@@ -9,7 +9,7 @@ import ServerSideDatasource from './ServerSideDatasource'
 LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY || '')
 
 const columnDefs = [
-  {field: 'athlete', enableRowGroup: true, rowGroup: true, hide: true},
+  {field: 'athlete', /*enableRowGroup: true, rowGroup: true,*/ hide: false},
   {
     field: 'country',
     filter: 'agTextColumnFilter',
@@ -25,9 +25,9 @@ const columnDefs = [
     //     }, 100)
     //   },
     // },
-    enableRowGroup: true, rowGroup: true, hide: true
+    /*enableRowGroup: true, rowGroup: true,*/ hide: false
   },
-  {field: 'sport', enableRowGroup: true, rowGroup: true, hide: true},
+  {field: 'sport', /*enableRowGroup: true, rowGroup: true,*/ hide: false},
   {
     field: 'year',
     filter: 'agNumberColumnFilter',
@@ -40,6 +40,12 @@ const columnDefs = [
   {field: 'silver', type: 'valueColumn'},
   {field: 'bronze', type: 'valueColumn'},
 ]
+
+const defaultColDef = {
+  filterParams: {
+    debounceMs: 1000
+  }
+}
 
 const sideBar = {
   toolPanels: [
@@ -61,6 +67,7 @@ const sideBar = {
   defaultToolPanel: 'columns',
 }
 const gridOptions = {
+  defaultColDef,
   columnDefs,
   sideBar,
 
