@@ -6,7 +6,7 @@ class ServerSideDatasource {
   private client: ApolloClient<any>
 
   constructor(gridOptions: any) {
-    this.gridOptions = gridOptions
+    this.gridOptions = {...gridOptions}
     this.client = new ApolloClient({uri: 'http://localhost:8080/graphql/'})
   }
 
@@ -40,6 +40,7 @@ class ServerSideDatasource {
 const query = (request: any, columns: any) => {
 
   const fields = columns.map((col: any) => col.field)
+  console.log('fields', fields)
 
   return {
     query: gql`
