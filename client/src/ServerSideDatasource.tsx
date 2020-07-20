@@ -11,7 +11,7 @@ class ServerSideDatasource {
   }
 
   getRows(params: any) {
-    let jsonRequest = JSON.stringify(params.request, null, 2)
+    let jsonRequest = JSON.stringify({params: params.request}, null, 2)
     console.log(jsonRequest)
 
     const columns = this.gridOptions.columnDefs
@@ -48,14 +48,18 @@ const query = (request: any, columns: any) => {
             $end: Int,
             $sortModel: [SortModel],
             $groups: [RowGroup],
-            $groupKeys: [String]
+            $groupKeys: [String],
+            $filterModel: FilterModel
         ) {
             rows(
-                startRow: $start,
-                endRow: $end,
-                sorting: $sortModel,
-                rowGroups: $groups,
-                groupKeys: $groupKeys
+                params: {
+                    startRow: $start,
+                    endRow: $end,
+                    sorting: $sortModel,
+                    rowGroups: $groups,
+                    groupKeys: $groupKeys,
+                    filterModel: $filterModel
+                }
             ) {
                 ${fields}
             }
@@ -66,7 +70,8 @@ const query = (request: any, columns: any) => {
       end: request.endRow,
       sortModel: request.sortModel,
       groups: request.rowGroupCols,
-      groupKeys: request.groupKeys
+      groupKeys: request.groupKeys,
+      filterModel: request.filterModel
     },
   }
 }

@@ -12,7 +12,7 @@ const columnDefs = [
   {field: 'athlete', enableRowGroup: true, rowGroup: true, hide: true},
   {field: 'country', enableRowGroup: true, rowGroup: true, hide: true},
   {field: 'sport', enableRowGroup: true, rowGroup: true, hide: true},
-  {field: 'year'},
+  {field: 'year', filter: 'agNumberColumnFilter',},
   {field: 'age'},
   {field: 'gold', type: 'valueColumn'},
   {field: 'silver', type: 'valueColumn'},
