@@ -11,57 +11,48 @@ import ServerSideDatasource from './ServerSideDatasource'
 
 LicenseManager.setLicenseKey(process.env.REACT_APP_LICENSE_KEY || '')
 
+const columnDefs = [
+  {field: 'athlete'},
+  {field: 'country', enableRowGroup: true, rowGroup: true, hide: true},
+  {field: 'sport', enableRowGroup: true, rowGroup: true, hide: true},
+  {field: 'year'},
+  {field: 'age'},
+  {field: 'gold', type: 'valueColumn'},
+  {field: 'silver', type: 'valueColumn'},
+  {field: 'bronze', type: 'valueColumn'},
+]
+
 const initGridOptions: GridOptions = {
-  columnDefs: [
-    {
-      field: 'athlete',
-      filter: 'agTextColumnFilter',
-      minWidth: 220,
-      filterParams: {
-        apply: true,
-        suppressSorting: true,
-        suppressRemoveEntries: true,
-        suppressAndOrCondition: true,
-      },
-    },
-    {
-      field: 'year',
-      filter: 'agNumberColumnFilter',
-      filterParams: {
-        apply: true,
-        suppressSorting: true,
-        suppressRemoveEntries: true,
-        suppressAndOrCondition: true,
-      },
-    },
-    {
-      field: 'gold',
-      type: 'number',
-    },
-    {
-      field: 'silver',
-      type: 'number',
-    },
-    {
-      field: 'bronze',
-      type: 'number',
-    },
-  ],
-  defaultColDef: {
-    minWidth: 100,
-    // menuTabs: ['filterMenuTab'],
-  },
+  columnDefs,
+
+  // use the server-side row model
+  rowModelType: 'serverSide',
+
+  // fetch 100 rows per at a time
+  cacheBlockSize: 200,
+
+  // only keep 10 blocks of rows
+  maxBlocksInCache: 10,
+
+  sideBar: true,
+
+  enableColResize: true,
+  enableSorting: true,
   enableFilter: true,
-  floatingFilter: true,
+
   columnTypes: {
-    number: {
-      filter: 'agNumberColumnFilter',
-      filterParams: {
-        apply: true,
-      }
+    dimension: {
+      enableRowGroup: true,
+      enablePivot: true,
+    },
+    valueColumn: {
+      width: 150,
+      aggFunc: 'sum',
+      enableValue: true,
+      cellClass: 'number',
+      allowedAggFuncs: ['avg', 'sum', 'min', 'max']
     }
   },
-  rowModelType: 'serverSide',
 }
 
 function App() {
@@ -72,7 +63,7 @@ function App() {
     <div
       className="ag-theme-balham"
       style={{
-        height: '250px',
+        height: '500px',
         width: '1400px'
       }}
     >
